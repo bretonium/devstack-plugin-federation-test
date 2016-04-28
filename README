@@ -1,0 +1,20 @@
+Install federation bits for keystone to devstack.
+
+Although we decided not to have an external repository, for the sake of POC
+the plugin lives here. When the code will be sent for review, it will live
+in the main keystone repository. ``devstack-plugin-federation-test`` will
+be changed to ``keystone``, no other changes will be required.
+
+Use this local.conf for a quick test::
+
+    [[local|localrc]]
+    ADMIN_PASSWORD=secret
+    DATABASE_PASSWORD=$ADMIN_PASSWORD
+    RABBIT_PASSWORD=$ADMIN_PASSWORD
+    SERVICE_PASSWORD=$ADMIN_PASSWORD
+
+    HOST_IP=192.168.56.101
+    disable_all_services
+    enable_service key mysql
+    ENABLE_IDENTITY_V2=False
+    enable_plugin devstack-plugin-federation-test https://github.com/bretonium/devstack-plugin-federation-test
