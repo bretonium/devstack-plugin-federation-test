@@ -16,7 +16,7 @@ function install_federation {
 }
 
 function configure_keystone_federation {
-    local here=$(cd $(dirname "$0") && pwd)
+    local here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     local keystone_apache_conf=$(apache_site_config_for keystone)
 
     # insert our Apache federation snippet into the Apache config
@@ -52,7 +52,9 @@ if is_service_enabled key; then
     if [[ "$1" == "stack" && "$2" == "install" ]]; then
         echo_summary "Configuring keystone for federation"
         install_federation
+        configure_keystone_federation
     elif [[ "$1" == "stack" && "$2" == "install" ]]; then
         echo_summary "Initializing Keystone Federation"
         init_federation
+    fi
 fi
